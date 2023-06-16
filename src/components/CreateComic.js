@@ -6,20 +6,18 @@ const CREATE_COMIC_MUTATION = gql`
 mutation PostMutation(
   $titulo: String!
   $paginas: Int!
-  $lanzamiento: String!
   $autor: String!
   $clasificacion: Int!
   $pais: String!
   $genero: String!
   $capitulos: Int!
   $serializacion: Int!
-  $precio: Float!
+  $precio: Int!
   ) {
-    createNumero(titulo: $titulo, paginas: $paginas, lanzamiento: $lanzamiento, autor: $autor, clasificacion: $clasificacion, pais: $pais, genero: $genero, capitulos: $capitulos, serializacion: $serializacion, precio: $precio) {
+    createNumero(titulo: $titulo, paginas: $paginas, autor: $autor, clasificacion: $clasificacion, pais: $pais, genero: $genero, capitulos: $capitulos, serializacion: $serializacion, precio: $precio) {
       id
       titulo
       paginas
-      lanzamiento
       autor
       clasificacion
       pais
@@ -37,7 +35,6 @@ const CreateComics = () => {
     id: 0,
     titulo: '',
     paginas: '',
-    lanzamiento: '',
     autor: 0,
     clasificacion: '',
     pais: '',
@@ -51,7 +48,6 @@ const CreateComics = () => {
     variables: {
       titulo: formState.titulo,
       paginas: formState.paginas,
-      lanzamiento: formState.lanzamiento,
       autor: formState.autor,
       clasificacion: formState.clasificacion,
       pais: formState.pais,
@@ -72,7 +68,6 @@ const CreateComics = () => {
       <div id="Formulario-Info">
         <p class="Espacio Espacio2" >Titulo: </p>
         <p class="Espacio Espacio2">Paginas: </p>
-        <p class="Espacio Espacio2">Lanzamiento: </p>
         <p class="Espacio Espacio2">Autor: </p>
         <p class="Espacio Espacio2" >Clasificacion: </p>
         <p class="Espacio Espacio2">Pais: </p>
@@ -96,12 +91,6 @@ const CreateComics = () => {
             <input className="Respuesta" value={formState.paginas} onChange={(e) =>
               setFormState({ ...formState, paginas: e.target.value })}
               type="number" placeholder="paginas del comic" />
-          </div>
-
-          <div className="Espacio" >
-            <input className="Respuesta" value={formState.lanzamiento} onChange={(e) =>
-              setFormState({ ...formState, lanzamiento: e.target.value })}
-              type="text" placeholder="lanzamiento del comic" />
           </div>
 
           <div className="Espacio" >

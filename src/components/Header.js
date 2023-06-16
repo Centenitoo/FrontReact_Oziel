@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/Header.css';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AUTH_TOKEN } from "./constants";
-import LanguageSelect from "./languageSelect";
 import { useTranslation } from "react-i18next";
+import LanguageSelect from "./LanguageSelect";
+import "../styles/Header.css";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -11,90 +11,80 @@ const Header = () => {
   const authToken = localStorage.getItem(AUTH_TOKEN);
 
   return (
+    <header className="header">
+      <div className="encabezado">
+        <div className="recuadroLogo">
+          <h1>
+            <b className="logoText">{t("Comic Crusaders")}</b>
+          </h1>
+          <img className="logoImg" src="./img/Icono.png" alt="Textp" />
+        </div>
 
-    <div className="Encabezado">
-
-      <div className="RecuadroLogo">
-        <h1><b className="Logo_Text">Comic Crusade</b></h1>
-        <img className='Logo_Img' src='./img/Icono.png' alt='Textp'></img>
-      </div>
-
-      <div className="menu">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/" className="no-underline black">
-              {t("Inicio")}
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/List" className="no-underline black">
-                {t("Mostrar_Comics")}
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/create" className="no-underline black" >
-                {t("Guardar_Comics")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/text-davinci-003" className="no-underline black">
-                {t("ObjetosIA")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/imagenia" className="no-underline black">
-                {t("ImagenesIA")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/search" className="ml1 no-underline black">
-                {t("search")}
-              </Link>
-            </li>
-            <li>
-              {authToken && (
-                <Link to="/login" className="ml1 no-underline black">
-                  {t("Inicia Sesión")}
+        <div className="menu">
+          <nav>
+            <ul>
+              <li>
+                <Link to="/" className="no-underline black">
+                  {t("Inicio")}
                 </Link>
-              )}
-              <div className="flex flex-fixed">
-                {authToken ? (
-                  <div
-                    className="ml1 pointer black"
-                    onClick={() => {
-                      localStorage.removeItem(AUTH_TOKEN);
-                      navigate(`/`);
-                    }}
-                    style={{ color: "white" }}
-                  >
-                    {t("Cerrar Sesión")}
-                  </div>
-                ) : (
-                  <Link to="/login" className="ml1 no-underline black">
-                    {t("Iniciar Sesión")}
+              </li>
+              <li>
+                <Link to="/search" className="ml1 no-underline black">
+                  {t("search")}
+                </Link>
+              </li>
+
+              {authToken && (
+                <li>
+                  <Link to="/create" className="no-underline black">
+                    {t("Guardar_Comics")}
                   </Link>
-                )}
-              </div>
-            </li>
-
-            <li>
-              <div className="flex flex-fixed">
-                <div style={{ color: "white" }} className="ml1 pointer black">{t("Selecciona un lenguaje")}</div>
-                <div className="ml1 pointer black"> : </div>
-
-                <div>
-                  <LanguageSelect className="ml1 pointer black" />
+                </li>
+              )}
+              {authToken && (
+                <li>
+                  <Link to="/openai" className="no-underline black">
+                    {t("OpenAi")}
+                  </Link>
+                </li>
+              )}
+              <li>
+                <div className="flex flex-fixed menu">
+                  <div style={{ color: "white" }} className="ml1 pointer black">
+                    {t("select_language")}
+                  </div>
+                  <div className="ml1 pointer black"> : </div>
+                  <div>
+                    <LanguageSelect className="ml1 pointer black" />
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-          </ul>
-        </nav>
+        <div className="flex flex-fixed ">
+          {authToken ? (
+            <div
+              className="pinterest-btn pinterest-btn--black pointer black"
+              onClick={() => {
+                localStorage.removeItem(AUTH_TOKEN);
+                navigate(`/`);
+              }}
+            >
+              {t("logout")}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="pinterest-btn pinterest-btn--black no-underline black"
+            >
+              {t("login")}
+            </Link>
+          )}
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 

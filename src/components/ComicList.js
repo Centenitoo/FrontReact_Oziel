@@ -9,7 +9,6 @@ query {
     id
     titulo
     paginas
-    lanzamiento
     autor
     clasificacion
     pais
@@ -29,7 +28,7 @@ const ComicList = () => {
     <div>
       <span class="Mostrar_Titulo">Comics Almacenados!: </span>
 
-      {data && data.flowers.map((top) => {
+      {data && data.numeros.map((top) => {
         return (
           <div class="card card3">
             <div class="inner">
@@ -41,10 +40,6 @@ const ComicList = () => {
 
                 <div className='subtitle'> Paginas_Comic:
                   <span className='texto'> {top.paginas} </span>
-                </div>
-
-                <div className='subtitle'> Lanzamiento_Comic:
-                  <span className='texto'> {top.lanzamiento} </span>
                 </div>
 
                 <div className='subtitle'> Autor_Comic:
